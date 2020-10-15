@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Services System</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<nav class="mnb navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div style="padding: 15px 0;">
+         <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="user-info" href="#" style="margin-right: 11px;">Facebook Services System</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--msb: main sidebar-->
+<div class="msb" id="msb">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <div class="brand-wrapper">
+          <div class="brand-name-wrapper">
+            <a class="navbar-brand" href="#" id="user_name">
+              Facebook Services
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Menu -->
+      <div class="side-menu-container">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/home.html"><i class="fa fa-dashboard"></i>Trang Chủ</a></li>
+          <li><a href="filter-friends.html"><i class="fa fa-compass"></i>Lọc Bạn Bè</a></li>
+          <li><a href="/poke-friends.html"><i class="fa fa-space-shuttle"></i>Chọc Bạn Bè</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>  
+</div>
+<!--main content wrapper-->
+<div class="mcw">
+  <!--navigation here-->
+  <!--main content view-->
+  <div class="cv">
+    <div>
+     <div class="inbox">
+       <div class="inbox-sb">
+       </div>
+       <div class="inbox-bx container">
+         <div class="row">
+          <div style="margin-top: 30px;"></div>
+          <!-- home -->
+
+          <div class="col-md-12"> 
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-4 text-center" align="center">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">Bạn Bè &nbsp; <span class="glyphicon glyphicon-user"></span></div>
+                    <div id="num-friends" class="panel-body">Đang lấy...</div>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center" align="center">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">Nhóm &nbsp; <span class="glyphicon glyphicon-plus-sign"></span></div>
+                    <div id="num-groups" class="panel-body">Đang lấy...</div>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center" align="center">
+                  <div class="panel panel-warning">
+                    <div class="panel-heading">Người Theo Dõi &nbsp; <span class="glyphicon glyphicon-eye-open"></span></div>
+                    <div id="num-followers" class="panel-body">Đang lấy...</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" align="right">
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">Cookie</div>
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <textarea class="form-control"  id="cookie" rows="6"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+<script src='scripts/jquery-3.5.1.js'></script>
+<!-- <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script> -->
+<script src='scripts/home.js'></script>
+</body>
+</html>

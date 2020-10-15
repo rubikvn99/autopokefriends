@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Services System</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css"/>
+  <script src='scripts/jquery-3.5.1.js'></script>
+  <script src="scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+  <script src="scripts/dataTables.bootstrap.min.js" type="text/javascript"></script>
+  <script src="scripts/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+
+<button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteModal" id="confirm-delete">Xóa</button>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="title-delete" class="modal-title">Xác nhận xóa bạn bè</h4>
+      </div>
+      <div class="modal-body" id="confirm-delete-body">
+        <div style="max-height: 200px;width: 100%" class="table-responsive">
+          <table class="table">
+            <tbody id="delete-body-result">
+          <!--     <tr>
+                <td>7:00 PM</td>
+                <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+              src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>7:00 PM</td>
+                <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+              src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                <td>OK</td>
+              </tr> -->
+            </tbody>
+          </table>          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="execute-delete">Thực hiện</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="close-delete">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pokeModal" id="confirm-poke">Chọc</button>
+<!-- Modal -->
+<div class="modal fade" id="pokeModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="title-poke" class="modal-title">Xác nhận chọc bạn bè</h4>
+      </div>
+      <div class="modal-body" id="confirm-poke-body">
+        <div style="max-height: 200px;width: 100%" class="table-responsive">
+          <table class="table">
+            <tbody id="poke-body-result">
+          <!--     <tr>
+                <td>7:00 PM</td>
+                <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+              src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>7:00 PM</td>
+                <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+              src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                <td>OK</td>
+              </tr> -->
+            </tbody>
+          </table>          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="execute-poke">Thực hiện</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="close-poke">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- partial:index.partial.html -->
+<nav class="mnb navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div style="padding: 15px 0;">
+         <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="user-info" href="#" style="margin-right: 11px;">Facebook Services System</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--msb: main sidebar-->
+<div class="msb" id="msb">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <div class="brand-wrapper">
+          <div class="brand-name-wrapper">
+            <a class="navbar-brand" href="#" id="user_name">
+              Facebook Services
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Menu -->
+      <div class="side-menu-container">
+        <ul class="nav navbar-nav">
+          <li><a href="/home.html"><i class="fa fa-dashboard"></i>Trang Chủ</a></li>
+          <li><a href="filter-friends.html"><i class="fa fa-compass"></i>Lọc Bạn Bè</a></li>
+          <li class="active"><a href="/poke-friends.html"><i class="fa fa-space-shuttle"></i>Chọc Bạn Bè</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>  
+</div>
+<!--main content wrapper-->
+<div class="mcw">
+  <!--navigation here-->
+  <!--main content view-->
+  <div class="cv">
+    <div>
+     <div class="inbox">
+       <div class="inbox-sb">
+       </div>
+       <div class="inbox-bx container">
+         <div class="row">
+          <div class="col-md-12" style="margin-top: 30px;"></div>
+          <!-- home -->
+
+          <div class="col-md-12"> 
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">Tìm kiếm bạn bè &nbsp; <span class="glyphicon glyphicon-cog"></span></div>
+                    <div id="num-friends" class="panel-body">
+                      <div style="margin-top: 8px; padding-left: 8px;">
+                        <table>
+                          <tr>
+                            <td><input type="checkbox"   value="" id="ffemale"/></td>
+                            <td> &nbsp; Bạn bè giới tính nữ</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"   value="" id="fmale"/></td>
+                            <td> &nbsp; Bạn bè giới tính nam</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"   value="" id="favatar"/></td>
+                            <td> &nbsp; Bạn bè không có avatar</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"   value="" id="freaction"/></td>
+                            <td> &nbsp; Bạn bè không tương tác</td>
+                          </tr>
+                          <tr>
+                            <td><input type="checkbox"   value="" id="fscore"/></td>
+                            <td> &nbsp; Tìm kiếm bạn bè theo điểm</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <div style="margin-top: 8px;">
+                                <input style="margin-left:10px;width:40%" type="text" name="stime" id="sscore" value="0" /> &nbsp;>
+                                <input style="margin-left:10px;width:40%" type="text" name="etime" id="escore" value="0" />
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div style="margin-top: 20px;" align="center">
+                        <button style="width: 50%" type="button" class="btn btn-primary" id="btn-lookup">Tìm kiếm</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: none" class="panel panel-success">
+                    <div class="panel-heading">
+                      <div>Xóa bạn bè &nbsp; <span class="glyphicon glyphicon-trash"></span></div>
+                    </div>
+                    <div class="panel-body">
+                      <div style="padding-left: 8px;">
+                        <table>
+                          <tr>
+                            <td colspan="2">Thời gian trễ (giây)</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <div style="margin-top: 8px;" class="text-center">
+                                <input style="margin-left:10px;width:40%" type="text" name="stime" id="sdelete" value="0" /> &nbsp;>
+                                <input style="margin-left:10px;width:40%" type="text" name="etime" id="edelete" value="0" />
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div style="margin-top: 20px;" align="center">
+                        <button style="width: 50%" type="button" class="btn btn-danger" id="btn-delete">Xóa bạn bè</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <div>Chọc bạn bè &nbsp; <span class="glyphicon glyphicon-hand-right"></span></div>
+                    </div>
+                    <div class="panel-body">
+                      <div style="padding-left: 8px;">
+                        <table>
+                          <tr>
+                            <td colspan="2">Thời gian trễ (giây)</td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <div style="margin-top: 8px;" class="text-center">
+                                <input style="margin-left:10px;width:40%" type="text" name="stime" id="spoke" value="5" /> &nbsp;>
+                                <input style="margin-left:10px;width:40%" type="text" name="etime" id="epoke" value="10" />
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div style="margin-top: 20px;" align="center">
+                        <button style="width: 50%" type="button" class="btn btn-danger" id="btn-poke">Chọc bạn bè</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: none" class="panel panel-success">
+                   <div class="panel-heading">
+                      <div>Bạn bè đã được chọn &nbsp; <span class="glyphicon glyphicon-ok"></span></div>
+                    </div>
+                    <div class="panel-body">
+                      <div>
+                        <textarea class="form-control" id="selected-friends" style="width: 100%; height: 50px;"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: none;" class="panel panel-success">
+                   <div class="panel-heading">
+                      <div>Kết quả xóa bạn bè &nbsp; <span class="glyphicon glyphicon-star"></span></div>
+                    </div>
+                    <div class="panel-body" id="delete-body">
+                      <div style="min-height: 92px; max-height: 300px" class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Time</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Result</th>
+                            </tr>
+                          </thead>
+                          <tbody id="delete-result">
+                        <!--     <tr>
+                              <td>7:00 PM</td>
+                              <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+                            src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                              <td>OK</td>
+                            </tr>
+                            <tr>
+                              <td>7:00 PM</td>
+                              <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+                            src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                              <td>OK</td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-success">
+                   <div class="panel-heading">
+                      <div>Kết quả chọc bạn bè &nbsp; <span class="glyphicon glyphicon-share-alt"></span></div>
+                    </div>
+                    <div  class="panel-body" id="poke-body">
+                      <div style="min-height: 92px; max-height: 300px" class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Time</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Result</th>
+                            </tr>
+                          </thead>
+                          <tbody id="poke-result">
+                            <!-- <tr>
+                              <td>7:00 PM</td>
+                              <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+                            src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                              <td>OK</td>
+                            </tr>
+                            <tr>
+                              <td>7:00 PM</td>
+                              <td><div><img style="width:30px;height:30px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;" 
+                            src="https://graph.facebook.com/100009227235955/picture"><label>&nbsp;&nbsp;Phạm Sỹ Trường</label></div></td>
+                              <td>OK</td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-md-8">
+                  <div class="panel panel-info">
+                    <div id="title-friends" class="panel-heading">Friends &nbsp; <span class="glyphicon glyphicon-user"></span></div>
+                    <div id="body-friends" class="panel-body">Đang tải...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+<!-- <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script> -->
+<script src='scripts/poke-friends.js'></script>
+</body>
+</html>
